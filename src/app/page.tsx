@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-
+"use client"
 import type { NextPage } from "next";
 import Head from "next/head";
 import Header from "../components/Header";

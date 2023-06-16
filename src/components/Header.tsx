@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import { SocialIcon } from "react-social-icons";
 import { motion } from "framer-motion";
@@ -25,7 +24,6 @@ export default function Header({}: Props) {
             }}
             className="flex flex-row items-center"
          >
-            {/* Social Icons */}
             <SocialIcon
                url="https://www.linkedin.com/in/antónio-cortez/"
                fgColor="gray"
