@@ -24,12 +24,12 @@ export default defineType({
          type: "text",
       }),
       defineField({
-         name: "dateStarted ",
+         name: "dateStarted",
          title: "DateStarted",
          type: "date",
       }),
       defineField({
-         name: "dateEnded ",
+         name: "dateEnded",
          title: "DateEnded",
          type: "date",
       }),

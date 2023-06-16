@@ -30,7 +30,7 @@ export default defineType({
          type: "string",
       }),
       defineField({
-         name: "profilePic ",
+         name: "profilePic",
          title: "ProfilePic",
          type: "image",
          options: {
