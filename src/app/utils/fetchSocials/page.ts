@@ -10,9 +10,9 @@ type Data = {
    socials: Social[];
 };
 
-const social = async function fetchSocial() {
+export default async function fetchSocial() {
    const socials: Social[] = await sanityClient.fetch(query);
+   
    return socials;
 }
 
-//export default social

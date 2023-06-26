@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
@@ -10,8 +10,19 @@ import Projects from "../components/Projects";
 import ContactMe from "../components/ContactMe";
 import Link from "next/link";
 import Image from "next/image";
+import { Experience, PageInfo, Project, Skill, Social } from "../../typings";
+import fetchSocial from "./utils/fetchSocials/page";
 
-const Home: NextPage = () => {
+type Props = {
+   // pageInfo: PageInfo;
+   // experiences: Experience[];
+   // skills: Skill[];
+   // projects: Project[];
+   socials: Social[];
+};
+
+const Home = ({ socials, }: Props) => {
+   console.log("this is socials props" , socials)
    return (
       <div
          className="bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory 
@@ -21,8 +32,7 @@ const Home: NextPage = () => {
          <Head>
             <title>AC Portfolio</title>
          </Head>
-         <Header />
-
+         <Header socials={socials} />
          <section id="hero" className="snap-start">
             <Hero />
          </section>
@@ -60,4 +70,13 @@ const Home: NextPage = () => {
    );
 };
 
+
 export default Home;
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+   const socials: Social[] = await fetchSocial();
+   console.log("this is socials" , socials)
+   return {
+      props: {socials}
+   }
+}
