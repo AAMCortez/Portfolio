@@ -1,25 +1,28 @@
 import { groq } from "next-sanity";
-import { sanityClient } from "../../../../sanity";
-import { PageInfo, Social } from "../../../../typings";
+import { sanityClient, urlFor } from "../../../../sanity";
+import { Experience, PageInfo, Social } from "../../../../typings";
 
-
+// const query = groq`
+//     *[_type == "pageInfo"][0]
+// `;
 const query = groq`
-    *[_type == "pageInfo"][0]
+    *[_type == "experience"] {
+        ...,
+        technologies[]->
+    }
 `;
 
-
-
 export default async function Page() {
-   const pageInfo: PageInfo = await sanityClient.fetch(query);
-
-   console.log("this is the page info", pageInfo);
+   //const pageInfo: PageInfo = await sanityClient.fetch(query);
+   const experiences: Experience[] = await sanityClient.fetch(query);
+   console.log("this is the experience", experiences);
    return (
       <div>
-         <h1>hello {pageInfo.name}</h1>
-         <h1>things {pageInfo.backgroundInformation}</h1>
-         <h1>things {pageInfo.address}</h1>
-         <h1>things {pageInfo.phoneNumber}</h1>
-         <h1>things {pageInfo.email}</h1>
+         <h1>
+            {experiences.map((experience) => (
+               <div key={experience._id}>{experience.company}</div>
+            ))}
+         </h1>
       </div>
    );
 }

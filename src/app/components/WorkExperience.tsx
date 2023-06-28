@@ -1,11 +1,20 @@
-"use client"
+"use client";
 import React from "react";
 import { motion } from "framer-motion";
 import ExperienceCard from "./ExperienceCard";
+import { Experience } from "../../../typings";
+import { sanityClient } from "../../../sanity";
+import { groq } from "next-sanity";
 
-type Props = {};
+const query = groq`
+    *[_type == "experience"] {
+        ...,
+        technologies[]->
+    }
+`;
 
-export default function WorkExperience({}: Props) {
+export default async function WorkExperience() {
+   const experiences: Experience[] = await sanityClient.fetch(query);
    return (
       <motion.div
          initial={{ opacity: 0 }}
@@ -18,10 +27,9 @@ export default function WorkExperience({}: Props) {
          </h3>
 
          <div className="w-full flex space-x-5 overflow-x-scroll p-10 snap-x snap-mandatory scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80">
-          < ExperienceCard />
-          < ExperienceCard />
-          < ExperienceCard />
-          < ExperienceCard />
+            {experiences.map((experience) => (
+               <ExperienceCard key={experience._id} experience={experience} />
+            ))}
          </div>
       </motion.div>
    );

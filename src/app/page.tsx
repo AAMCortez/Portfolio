@@ -10,12 +10,8 @@ import Projects from "./components/Projects";
 import ContactMe from "./components/ContactMe";
 import Link from "next/link";
 import Image from "next/image";
-import { PageInfo } from "../../typings";
-import { sanityClient } from "../../sanity";
-import { groq } from "next-sanity";
-const query = groq`
-    *[_type == "pageInfo"][0]
-`;
+
+
 
 
 
@@ -39,17 +35,21 @@ const Home:NextPage = () => {
          </section>
 
          <section id="about" className="snap-center">
+         { /*@ts-ignore */}
             <About />
          </section>
 
          <section id="experience" className="snap-center">
+         { /*@ts-ignore */}
             <WorkExperience />
          </section>
 
          <section id="skills" className="snap-start">
+         { /*@ts-ignore */}
             <Skills />
          </section>
          <section id="projects" className="snap-start">
+         { /*@ts-ignore */}
             <Projects />
          </section>
 

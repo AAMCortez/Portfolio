@@ -1,10 +1,17 @@
-"use client"
+"use client";
 import React from "react";
 import { motion } from "framer-motion";
 import Skill from "./Skill";
+import { groq } from "next-sanity";
+import { Skill as Skille } from "../../../typings";
+import { sanityClient } from "../../../sanity";
 type Props = {};
+const query = groq`
+    *[_type == "skill"]
+`;
 
-export default function Skills({}: Props) {
+export default async function Skills({}: Props) {
+   const skills: Skille[] = await sanityClient.fetch(query);
    return (
       <motion.div
          initial={{ opacity: 0 }}
@@ -17,20 +24,15 @@ export default function Skills({}: Props) {
             Skills
          </h3>
          <h3 className="absolute  top-36 uppercase tracking-[3px] text-gray-500 text-sm">
-            Hover over a skill for currency profieciency
+            Hover over a skill
          </h3>
          <div className="grid grid-cols-4 gap-5">
-            <Skill />
-            <Skill />
-            <Skill />
-            <Skill />
-            <Skill />
-            <Skill />
-            <Skill />
-            <Skill />
-            <Skill />
-            <Skill />
-            <Skill />
+            {skills?.slice(0, skills.length / 2).map((skill) => (
+               <Skill key={skill._id} skill={skill} />
+            ))}
+            {skills?.slice(skills.length / 2, skills.length).map((skill) => (
+               <Skill key={skill._id} skill={skill} directionLeft />
+            ))}
          </div>
       </motion.div>
    );

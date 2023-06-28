@@ -1,11 +1,20 @@
-"use client"
+"use client";
 import React from "react";
 import { motion } from "framer-motion";
+import { Project } from "../../../typings";
+import { sanityClient, urlFor } from "../../../sanity";
+import { groq } from "next-sanity";
 
 type Props = {};
+const query = groq`
+    *[_type == "skill"] {
+        ...,
+        technologies[]->
+    }
+`;
 
-export default function Project({}: Props) {
-   const projects = [1, 2, 3, 4, 5];
+export default async function Project({}: Props) {
+   const projects: Project[] = await sanityClient.fetch(query);
    return (
       <motion.div
          initial={{ opacity: 0 }}
@@ -18,9 +27,11 @@ export default function Project({}: Props) {
             Projects
          </h3>
 
-         <div className="relative w-full flex overflow-x-scroll overflow-y-hidden snap-x snap-mandatory z-20
-         scrollbar-thin scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80">
-            {projects.map((project, index) => (
+         <div
+            className="relative w-full flex overflow-x-scroll overflow-y-hidden snap-x snap-mandatory z-20
+         scrollbar-thin scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80"
+         >
+            {projects?.map((project, index) => (
                <div
                   key={index}
                   className="w-screen flex-shrink-0 snap-center flex flex-col space-y-5 items-center 
@@ -34,7 +45,7 @@ export default function Project({}: Props) {
                      transition={{ duration: 1.2 }}
                      whileInView={{ opacity: 1, y: 0 }}
                      viewport={{ once: true }}
-                     src="https://thumbs.dreamstime.com/b/projects-concept-black-chalkboard-d-rendering-handwritten-top-view-office-desk-lot-business-office-supplies-79906734.jpg"
+                     src={urlFor(project.image).url()}
                      alt=""
                   />
 
@@ -43,13 +54,20 @@ export default function Project({}: Props) {
                         <span className="underline decoration-[#F7AB0A]/50">
                            Case study {index + 1} of {projects.length}:
                         </span>{" "}
-                        some clone
+                        {project?.title}
                      </h4>
-
+                     <div className="flex items-center space-x-2 justify-center">
+                        {project.technologies.map((tech) => (
+                           <img
+                              className="h-10 w-10"
+                              key={tech._id}
+                              src={urlFor(tech.image).url()}
+                              alt=""
+                           />
+                        ))}
+                     </div>
                      <p className="text-lg text-center md:text-left">
-                        It´bs a simulation for a restaurant, a manager can have
-                        acess to the full CRUD and the reviews. The customers
-                        can view the dishes and leave a review.
+                        {project?.summary}
                      </p>
                   </div>
                </div>

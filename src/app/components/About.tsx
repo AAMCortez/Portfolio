@@ -1,11 +1,16 @@
 "use client"
 import React from "react";
 import { motion } from "framer-motion";
-//import aboutImg from "../../Images/AboutImgfit.jpg"
+import { PageInfo } from "../../../typings";
+import { sanityClient, urlFor } from "../../../sanity";
+import { groq } from "next-sanity";
 
-type Props = {};
+const query = groq`
+    *[_type == "pageInfo"][0]
+`;
 
-export default function About({}: Props) {
+export default async function About() {
+   const pageInfo: PageInfo = await sanityClient.fetch(query);
    return (
       <motion.div
          initial={{ opacity: 0 }}
@@ -28,7 +33,7 @@ export default function About({}: Props) {
             }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            src="https://media.licdn.com/dms/image/D4D03AQF1vrxvUl9Hfw/profile-displayphoto-shrink_800_800/0/1684670014183?e=1690416000&v=beta&t=fuohWE6q_xlZPe01iVUPZb78qqenGOSOj7VcBNGhdSE"
+            src={urlFor(pageInfo?.profilePic).url()}
             className="-mb-20 md:mb-0 flex-shrink-0 w-56 h-56 rounded-full object-cover 
          md:rounded-lg md:w-64 md:h-95 xl:w-[500px] xl:h-[600px]"
          />
@@ -40,27 +45,7 @@ export default function About({}: Props) {
                background
             </h4>
             <p className="text-base">
-               As a nurse with critical experience in the COVID-19 pandemic and
-               a passion for technology, I am eager to embark on a new career as
-               a FullStack Developer. My background in nursing has honed my
-               ability to work effectively as part of a multidisciplinary team,
-               as well as my communication, improvisational, and conflict
-               resolution skills. Throughout my nursing career, I had the
-               opportunity to work with complex patients and learn something new
-               every day, all while managing a heavy workload in a fast-paced
-               environment. This experience has prepared me well for the
-               challenges of the tech industry and I am excited to bring my
-               adaptability, resilience, and drive to this new field. I`ve
-               always liked technology and it has always captivated me and
-               sparked my interest. That`s why, after experiencing burnout from
-               the demanding and emotionally taxing work as a nurse during the
-               COVID-19 pandemic, I decided to look for a way to change my
-               career and work with something I am passionate and excited about.
-               I pursued a FullStack Developer career and honed my skills
-               through hands-on projects, eager to continuously learn and grow
-               in the field. I am confident that my unique background and
-               experiences make me a valuable asset to any team and I am eager
-               to apply my skills to real-world projects.
+               {pageInfo?.backgroundInformation}
             </p>
          </div>
       </motion.div>

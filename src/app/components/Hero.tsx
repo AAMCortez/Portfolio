@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { Cursor, useTypewriter } from "react-simple-typewriter";
 import BackgroundCircles from "./BackgroundCircles";
@@ -7,18 +7,17 @@ import ProfImg from "../../../Images/Profile.jpeg";
 import Link from "next/link";
 
 
-type Props = {};
-
-export default function Hero({}: Props) {
+export default function Hero() {
    const [text, count] = useTypewriter({
       words: [
-         "Hello There, my name is António",
+         "Hello There, my name is <António Cortez />",
          "A Web Developer who also likes the Sun",
-         "This is my Crib!",
+         "&& This is my Portfolio!",
       ],
       loop: true,
       delaySpeed: 2000,
    });
+
    return (
       <div className="h-screen flex flex-col space-y-8 items-center justify-center text-center overflow-hidden">
          <BackgroundCircles />
