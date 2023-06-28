@@ -1,18 +1,25 @@
-import type { NextApiRequest, NextApiResponse } from "next";
 import { groq } from "next-sanity";
 import { sanityClient } from "../../../../sanity";
-import { Social } from "../../../../typings";
+import { PageInfo, Social } from "../../../../typings";
+
 
 const query = groq`
-    *[_type == "social"]
+    *[_type == "pageInfo"][0]
 `;
 
-type Data = {
-   socials: Social[];
-};
+
 
 export default async function Page() {
-   const socials: Social[] = await sanityClient.fetch(query);
-   console.log(socials);
-   return <h1>hello {socials[0].title}</h1>;
+   const pageInfo: PageInfo = await sanityClient.fetch(query);
+
+   console.log("this is the page info", pageInfo);
+   return (
+      <div>
+         <h1>hello {pageInfo.name}</h1>
+         <h1>things {pageInfo.backgroundInformation}</h1>
+         <h1>things {pageInfo.address}</h1>
+         <h1>things {pageInfo.phoneNumber}</h1>
+         <h1>things {pageInfo.email}</h1>
+      </div>
+   );
 }

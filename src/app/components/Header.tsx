@@ -3,14 +3,17 @@ import React from "react";
 import { SocialIcon } from "react-social-icons";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Social } from "../../typings";
+import { Social } from "../../../typings";
+import { groq } from "next-sanity";
+import { sanityClient } from "../../../sanity";
 
-type Props = {
-   socials: Social[];
-};
+const query = groq`
+    *[_type == "social"]
+`;
 
 
-export default function Header({ socials }: Props) {
+export default async function Header() {
+   const socials: Social[] = await sanityClient.fetch(query);
    return (
       <header className="sticky top-0 p-5 flex items-start justify-between max-w-7xl mx-auto z-20 xl:items-center">
          <motion.div
@@ -29,25 +32,14 @@ export default function Header({ socials }: Props) {
             }}
             className="flex flex-row items-center"
          >
-            {/* {socials.map((social) => (
+            {socials.map((social) => (
                <SocialIcon
                key={social._id}
                url={social.url}
                fgColor="gray"
                bgColor="transparent"
             />
-            ))} */}
-            
-            <SocialIcon
-               url="https://github.com/AAMCortez"
-               fgColor="gray"
-               bgColor="transparent"
-            />
-            <SocialIcon
-               url="https://github.com/AAMCortez"
-               fgColor="gray"
-               bgColor="transparent"
-            />
+            ))}
          </motion.div>
          <Link href="#contact">
             <motion.div
@@ -66,12 +58,12 @@ export default function Header({ socials }: Props) {
                }}
                className="flex flex-row items-center text-gray-300 cursor-pointer"
             >
-               <SocialIcon
+               {/* <SocialIcon
                   className="cursor-pointer"
                   network="email"
                   fgColor="gray"
                   bgColor="transparent"
-               />
+               /> */}
                <p className="uppercase hidden md:inline-flex text-sm text-gray-400">
                   Get In Touch
                </p>

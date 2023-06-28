@@ -1,28 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
-import type { GetStaticProps, NextPage } from "next";
+import type { NextPage } from "next";
 import Head from "next/head";
-import Header from "../components/Header";
-import Hero from "../components/Hero";
-import About from "../components/About";
-import WorkExperience from "../components/WorkExperience";
-import Skills from "../components/Skills";
-import Projects from "../components/Projects";
-import ContactMe from "../components/ContactMe";
+import Header from "./components/Header";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import WorkExperience from "./components/WorkExperience";
+import Skills from "./components/Skills";
+import Projects from "./components/Projects";
+import ContactMe from "./components/ContactMe";
 import Link from "next/link";
 import Image from "next/image";
-import { Experience, PageInfo, Project, Skill, Social } from "../../typings";
-import fetchSocial from "./utils/fetchSocials/page";
+import { PageInfo } from "../../typings";
+import { sanityClient } from "../../sanity";
+import { groq } from "next-sanity";
+const query = groq`
+    *[_type == "pageInfo"][0]
+`;
 
-type Props = {
-   // pageInfo: PageInfo;
-   // experiences: Experience[];
-   // skills: Skill[];
-   // projects: Project[];
-   socials: Social[];
-};
 
-const Home = ({ socials, }: Props) => {
-   console.log("this is socials props" , socials)
+
+
+const Home:NextPage = () => {
    return (
       <div
          className="bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory 
@@ -32,9 +30,12 @@ const Home = ({ socials, }: Props) => {
          <Head>
             <title>AC Portfolio</title>
          </Head>
-         <Header socials={socials} />
+      { /*@ts-ignore */}
+         <Header />
+
          <section id="hero" className="snap-start">
-            <Hero />
+         { /*@ts-ignore */} 
+         <Hero />
          </section>
 
          <section id="about" className="snap-center">
@@ -72,11 +73,3 @@ const Home = ({ socials, }: Props) => {
 
 
 export default Home;
-
-export const getStaticProps: GetStaticProps<Props> = async () => {
-   const socials: Social[] = await fetchSocial();
-   console.log("this is socials" , socials)
-   return {
-      props: {socials}
-   }
-}

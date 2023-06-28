@@ -3,7 +3,7 @@ import React from "react";
 import { Cursor, useTypewriter } from "react-simple-typewriter";
 import BackgroundCircles from "./BackgroundCircles";
 import Image from "next/image";
-import ProfImg from "../../Images/Profile.jpeg";
+import ProfImg from "../../../Images/Profile.jpeg";
 import Link from "next/link";
 
 

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import logoHSM from "../../Images/Logo-HSM.jpeg";
+import logoHSM from "../../../Images/Logo-HSM.jpeg";
 import { motion } from "framer-motion";
 
 type Props = {};
