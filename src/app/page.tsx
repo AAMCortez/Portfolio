@@ -28,7 +28,7 @@ const Home = async () => {
       scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80"
       >
          <Head>
-            <title>AC Portfolio</title>
+            <title>{pageInfo.name} - Portfolio</title>
          </Head>
          {/*@ts-ignore */}
          <Header socials={socials} />

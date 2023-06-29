@@ -34,6 +34,7 @@ export default async function Header({ socials }: Props) {
                   url={social.url}
                   fgColor="gray"
                   bgColor="transparent"
+                  target="_blank"
                />
             ))}
          </motion.div>
@@ -54,15 +55,15 @@ export default async function Header({ socials }: Props) {
                }}
                className="flex flex-row items-center text-gray-300 cursor-pointer"
             >
+               <p className="uppercase hidden md:inline-flex text-sm text-gray-400">
+                  Get In Touch
+               </p>
                {/* <SocialIcon
                   className="cursor-pointer"
                   network="email"
                   fgColor="gray"
                   bgColor="transparent"
                /> */}
-               <p className="uppercase hidden md:inline-flex text-sm text-gray-400">
-                  Get In Touch
-               </p>
             </motion.div>
          </Link>
       </header>

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Project } from "../../../typings";
 import { urlFor } from "../../../sanity";
 import Link from "next/link";
+import { SocialIcon } from "react-social-icons";
 
 type Props = {
    projects: Project[];
@@ -28,7 +29,7 @@ export default async function Project({ projects }: Props) {
          >
             {projects?.map((project, index) => (
                <div
-                  key={index}
+                  key={project._id}
                   className="w-screen flex-shrink-0 snap-center flex flex-col space-y-5 items-center 
                   justify-center p-20 md:p-44 h-screen"
                >
@@ -64,6 +65,11 @@ export default async function Project({ projects }: Props) {
                      </div>
                      <p className="text-lg text-center md:text-left">
                         {project?.summary}
+                     </p>
+                     <p>
+                        <Link href={`${project.linkToBuild}`} target="_blank">
+                           <button className="heroButton">Repo</button>
+                        </Link>
                      </p>
                   </div>
                </div>
