@@ -2,16 +2,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Skill from "./Skill";
-import { groq } from "next-sanity";
 import { Skill as Skille } from "../../../typings";
-import { sanityClient } from "../../../sanity";
-type Props = {};
-const query = groq`
-    *[_type == "skill"]
-`;
 
-export default async function Skills({}: Props) {
-   const skills: Skille[] = await sanityClient.fetch(query);
+type Props = {
+   skills: Skille[];
+};
+
+export default async function Skills({ skills }: Props) {
    return (
       <motion.div
          initial={{ opacity: 0 }}

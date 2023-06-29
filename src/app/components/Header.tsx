@@ -4,16 +4,12 @@ import { SocialIcon } from "react-social-icons";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Social } from "../../../typings";
-import { groq } from "next-sanity";
-import { sanityClient } from "../../../sanity";
 
-const query = groq`
-    *[_type == "social"]
-`;
+type Props = {
+   socials: Social[];
+};
 
-
-export default async function Header() {
-   const socials: Social[] = await sanityClient.fetch(query);
+export default async function Header({ socials }: Props) {
    return (
       <header className="sticky top-0 p-5 flex items-start justify-between max-w-7xl mx-auto z-20 xl:items-center">
          <motion.div
@@ -34,11 +30,11 @@ export default async function Header() {
          >
             {socials.map((social) => (
                <SocialIcon
-               key={social._id}
-               url={social.url}
-               fgColor="gray"
-               bgColor="transparent"
-            />
+                  key={social._id}
+                  url={social.url}
+                  fgColor="gray"
+                  bgColor="transparent"
+               />
             ))}
          </motion.div>
          <Link href="#contact">

@@ -3,18 +3,13 @@ import React from "react";
 import { motion } from "framer-motion";
 import ExperienceCard from "./ExperienceCard";
 import { Experience } from "../../../typings";
-import { sanityClient } from "../../../sanity";
-import { groq } from "next-sanity";
 
-const query = groq`
-    *[_type == "experience"] {
-        ...,
-        technologies[]->
-    }
-`;
 
-export default async function WorkExperience() {
-   const experiences: Experience[] = await sanityClient.fetch(query);
+type Props = {
+   experiences: Experience[];
+};
+
+export default async function WorkExperience({ experiences }: Props) {
    return (
       <motion.div
          initial={{ opacity: 0 }}

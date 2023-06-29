@@ -2,19 +2,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Project } from "../../../typings";
-import { sanityClient, urlFor } from "../../../sanity";
-import { groq } from "next-sanity";
+import { urlFor } from "../../../sanity";
 
-type Props = {};
-const query = groq`
-    *[_type == "skill"] {
-        ...,
-        technologies[]->
-    }
-`;
+type Props = {
+   projects: Project[];
+};
 
-export default async function Project({}: Props) {
-   const projects: Project[] = await sanityClient.fetch(query);
+export default async function Project({ projects }: Props) {
    return (
       <motion.div
          initial={{ opacity: 0 }}
@@ -57,7 +51,7 @@ export default async function Project({}: Props) {
                         {project?.title}
                      </h4>
                      <div className="flex items-center space-x-2 justify-center">
-                        {project.technologies.map((tech) => (
+                        {project?.technologies.map((tech) => (
                            <img
                               className="h-10 w-10"
                               key={tech._id}

@@ -9,14 +9,18 @@ import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import ContactMe from "./components/ContactMe";
 import Link from "next/link";
-import Image from "next/image";
+import { fetchPageInfo } from "./utils/fetchPageInfo/page";
+import { fetchExperience } from "./utils/fetchExperiences/page";
+import { fetchProjects } from "./utils/fetchProjects/page";
+import { fetchSkills } from "./utils/fetchSkills/page";
+import { fetchSocial } from "./utils/fetchSocials/page";
 
-
-
-
-
-
-const Home:NextPage = () => {
+const Home = async () => {
+   const pageInfo = await fetchPageInfo();
+   const experiences = await fetchExperience();
+   const projects = await fetchProjects();
+   const skills = await fetchSkills();
+   const socials = await fetchSocial();
    return (
       <div
          className="bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory 
@@ -26,31 +30,31 @@ const Home:NextPage = () => {
          <Head>
             <title>AC Portfolio</title>
          </Head>
-      { /*@ts-ignore */}
-         <Header />
+         {/*@ts-ignore */}
+         <Header socials={socials} />
 
          <section id="hero" className="snap-start">
-         { /*@ts-ignore */} 
-         <Hero />
+            {/*@ts-ignore */}
+            <Hero pageInfo={pageInfo} />
          </section>
 
          <section id="about" className="snap-center">
-         { /*@ts-ignore */}
-            <About />
+            {/*@ts-ignore */}
+            <About pageInfo={pageInfo} />
          </section>
 
          <section id="experience" className="snap-center">
-         { /*@ts-ignore */}
-            <WorkExperience />
+            {/*@ts-ignore */}
+            <WorkExperience experiences={experiences} />
          </section>
 
          <section id="skills" className="snap-start">
-         { /*@ts-ignore */}
-            <Skills />
+            {/*@ts-ignore */}
+            <Skills skills={skills}/>
          </section>
          <section id="projects" className="snap-start">
-         { /*@ts-ignore */}
-            <Projects />
+            {/*@ts-ignore */}
+            <Projects projects={projects} />
          </section>
 
          <section id="contact" className="snap-start">
@@ -70,6 +74,5 @@ const Home:NextPage = () => {
       </div>
    );
 };
-
 
 export default Home;

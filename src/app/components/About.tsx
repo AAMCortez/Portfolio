@@ -1,16 +1,14 @@
-"use client"
+"use client";
 import React from "react";
 import { motion } from "framer-motion";
 import { PageInfo } from "../../../typings";
-import { sanityClient, urlFor } from "../../../sanity";
-import { groq } from "next-sanity";
+import { urlFor } from "../../../sanity";
 
-const query = groq`
-    *[_type == "pageInfo"][0]
-`;
+type Props = {
+   pageInfo: PageInfo;
+};
 
-export default async function About() {
-   const pageInfo: PageInfo = await sanityClient.fetch(query);
+export default async function About({ pageInfo }: Props) {
    return (
       <motion.div
          initial={{ opacity: 0 }}
@@ -44,9 +42,7 @@ export default async function About() {
                <span className="underline decoration-[#F7AB0A]/50">little</span>{" "}
                background
             </h4>
-            <p className="text-base">
-               {pageInfo?.backgroundInformation}
-            </p>
+            <p className="text-base">{pageInfo?.backgroundInformation}</p>
          </div>
       </motion.div>
    );
