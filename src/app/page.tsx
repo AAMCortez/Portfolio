@@ -42,19 +42,17 @@ const Home = async () => {
             {/*@ts-ignore */}
             <About pageInfo={pageInfo} />
          </section>
-
-         <section id="experience" className="snap-center">
-            {/*@ts-ignore */}
-            <WorkExperience experiences={experiences} />
-         </section>
-
          <section id="skills" className="snap-start">
             {/*@ts-ignore */}
-            <Skills skills={skills}/>
+            <Skills skills={skills} />
          </section>
          <section id="projects" className="snap-start">
             {/*@ts-ignore */}
             <Projects projects={projects} />
+         </section>
+         <section id="experience" className="snap-center">
+            {/*@ts-ignore */}
+            <WorkExperience experiences={experiences} />
          </section>
 
          <section id="contact" className="snap-start">
@@ -65,7 +63,7 @@ const Home = async () => {
                <div className="flex items-center justify-center">
                   <img
                      className="h-10 w-10 rounded-full filter grayscale hover:grayscale-0 cursor-pointer"
-                     src="https://cdn-icons-png.flaticon.com/512/25/25694.png"
+                     src="https://w7.pngwing.com/pngs/848/762/png-transparent-computer-icons-home-house-home-angle-building-rectangle-thumbnail.png"
                      alt=""
                   />
                </div>
