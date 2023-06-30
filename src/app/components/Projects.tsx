@@ -1,10 +1,10 @@
 "use client";
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { motion } from "framer-motion";
 import { Project } from "../../../typings";
 import { urlFor } from "../../../sanity";
 import Link from "next/link";
-import { SocialIcon } from "react-social-icons";
 
 type Props = {
    projects: Project[];
@@ -25,7 +25,7 @@ export default async function Project({ projects }: Props) {
 
          <div
             className="relative w-full flex overflow-x-scroll overflow-y-hidden snap-x snap-mandatory z-20
-         scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80"
+         scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80 "
          >
             {projects?.map((project, index) => (
                <div
@@ -43,7 +43,7 @@ export default async function Project({ projects }: Props) {
                      viewport={{ once: true }}
                      src={urlFor(project.image).url()}
                      alt=""
-                     className="relative max-w-full h-auto"
+                     className="relative max-h-[700px]"
                   />
 
                   <div className="space-y-10 px-0 md:px-10 max-w-5xl">

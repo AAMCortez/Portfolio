@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import type { NextPage } from "next";
 import Head from "next/head";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
@@ -9,18 +8,52 @@ import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import ContactMe from "./components/ContactMe";
 import Link from "next/link";
-import { fetchPageInfo } from "./utils/fetchPageInfo/page";
-import { fetchExperience } from "./utils/fetchExperiences/page";
-import { fetchProjects } from "./utils/fetchProjects/page";
-import { fetchSkills } from "./utils/fetchSkills/page";
-import { fetchSocial } from "./utils/fetchSocials/page";
+import { sanityClient } from "../../sanity";
+import { Experience, PageInfo, Project, Skill, Social } from "../../typings";
+import { groq } from "next-sanity";
 
 const Home = async () => {
-   const pageInfo = await fetchPageInfo();
-   const experiences = await fetchExperience();
-   const projects = await fetchProjects();
-   const skills = await fetchSkills();
-   const socials = await fetchSocial();
+   const pageInfofunc = async () => {
+      const pageInfo: PageInfo = await sanityClient.fetch(groq`
+      *[_type == "pageInfo"][0]
+  `);
+      return pageInfo;
+   };
+   const experiencesfunc = async (): Promise<Experience> => {
+      const experiences: Experience = await sanityClient.fetch(groq`
+      *[_type == "experience"] {
+          ...,
+          technologies[]->
+      }
+  `);
+      return experiences;
+   };
+   const projectsfunc = async () => {
+      const projects: Project = await sanityClient.fetch(groq`
+      *[_type == "project"] {
+          ...,
+          technologies[]->
+      }
+  `);
+      return projects;
+   };
+   const skillsfunc = async () => {
+      const skills: Skill = await sanityClient.fetch(groq`
+      *[_type == "skill"]
+  `);
+      return skills;
+   };
+   const socialsfunc = async () => {
+      const socials: Social = await sanityClient.fetch(groq`
+      *[_type == "social"]
+  `);
+      return socials;
+   };
+   const pageInfo = await pageInfofunc();
+   const experiences = await experiencesfunc();
+   const projects = await projectsfunc();
+   const skills = await skillsfunc();
+   const socials = await socialsfunc();
    return (
       <div
          className="bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory 

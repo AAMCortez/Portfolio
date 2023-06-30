@@ -1,4 +1,4 @@
-import Image from "next/image";
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import { motion } from "framer-motion";
 import { Experience } from "../../../typings";
@@ -37,6 +37,7 @@ export default function ExperienceCard({ experience }: Props) {
                      key={tech._id}
                      className="h-10 w-10 rounded-full"
                      src={urlFor(tech.image).url()}
+                     alt=""
                   />
                ))}
             </div>
