@@ -11,8 +11,13 @@ import Link from "next/link";
 import { sanityClient } from "../../sanity";
 import { Experience, PageInfo, Project, Skill, Social } from "../../typings";
 import { groq } from "next-sanity";
+import { Metadata } from 'next'
 
+export const metadata: Metadata = {
+  title: 'António Cortez Porfolio',
+}
 const Home = async () => {
+   
    const pageInfofunc = async () => {
       const pageInfo: PageInfo = await sanityClient.fetch(groq`
       *[_type == "pageInfo"][0]
@@ -60,9 +65,7 @@ const Home = async () => {
       overflow-y-scroll overflow-x-hidden z-0 
       scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80"
       >
-         <Head>
-            <title>{pageInfo.name} - Portfolio</title>
-         </Head>
+         
          {/*@ts-ignore */}
          <Header socials={socials} />
 
