@@ -47,7 +47,7 @@ export default async function Project({ projects }: Props) {
                   <div className="space-y-10 px-0 md:px-10 max-w-5xl">
                      <h4 className="text-2xl lg:text-4xl font-semibold text-center">
                         <span className="underline decoration-[#F7AB0A]/50">
-                           Case study {index + 1} of {projects.length}:
+                           {index + 1} of {projects.length}:
                         </span>{" "}
                         {project?.title}
                      </h4>
