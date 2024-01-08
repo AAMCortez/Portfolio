@@ -11,13 +11,12 @@ import Link from "next/link";
 import { sanityClient } from "../../sanity";
 import { Experience, PageInfo, Project, Skill, Social } from "../../typings";
 import { groq } from "next-sanity";
-import { Metadata } from 'next'
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'António Cortez Porfolio',
-}
+   title: "António Cortez Porfolio",
+};
 const Home = async () => {
-   
    const pageInfofunc = async () => {
       const pageInfo: PageInfo = await sanityClient.fetch(groq`
       *[_type == "pageInfo"][0]
@@ -65,7 +64,6 @@ const Home = async () => {
       overflow-y-scroll overflow-x-hidden z-0 
       scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80"
       >
-         
          {/*@ts-ignore */}
          <Header socials={socials} />
 
@@ -98,7 +96,7 @@ const Home = async () => {
             <footer className="sticky bottom-5 w-full cursor-pointer">
                <div className="flex items-center justify-center">
                   <img
-                     className="h-10 w-10 rounded-full filter grayscale hover:grayscale-0 cursor-pointer"
+                     className="ficon h-10 w-10 opacity-50 saturate-50 brightness-75 contrast-75 rounded-full filter grayscale hover:grayscale-0 cursor-pointer"
                      src="https://w7.pngwing.com/pngs/848/762/png-transparent-computer-icons-home-house-home-angle-building-rectangle-thumbnail.png"
                      alt=""
                   />

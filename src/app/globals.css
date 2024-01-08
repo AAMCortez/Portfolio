@@ -11,3 +11,9 @@
       text-gray-500 placeholder-gray-500 transition-all focus:border-[#F7AB0A]/40 focus:text-[#F7AB0A]/40 hover:border-[#F7AB0A]/40;
    }
 }
+
+.ficon:hover {
+   background-color: rgba(247, 171, 10, 0.8);
+   filter: invert(20%) sepia(15%) saturate(150%) hue-rotate(0deg)
+      brightness(100%) contrast(100%);
+}
