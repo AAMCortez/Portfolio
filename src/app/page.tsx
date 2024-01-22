@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import Head from "next/head";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import About from "./components/About";

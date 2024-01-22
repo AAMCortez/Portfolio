@@ -21,14 +21,14 @@ export default function ContactMe({}: Props) {
          <h3 className="absolute top-16 md:top-24 uppercase tracking-[20px] text-gray-500 text-2xl">
             Contact
          </h3>
-         <div className="flex flex-col space-y-10 mt-10 md:mt-0 max-w-[300px] md:max-w-none">
+         <div className="flex flex-col space-y-10 mt-16 md:mt-0 max-w-[300px] md:max-w-none">
             <h4 className="text-2xl md:text-4xl font-semibold text-center">
                I have got just what you need.{" "}
                <span className="underline decoration-[#F7AB0A]/50">
                   Lets talk.
                </span>
             </h4>
-            <div className="space-y-10">
+            <div className="space-y-8 md:space-y-10">
                <div className="flex items-center space-x-5 justify-center">
                   <PhoneIcon className="text-[#F7AB0A] h-7 w-7 animate-pulse" />
                   <p className="text-2xl">+351 917 792 664</p>
